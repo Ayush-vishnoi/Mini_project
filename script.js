@@ -13,7 +13,7 @@ function updateOrderSummary() {
     orderItems.forEach(item => {
         const orderItem = document.createElement('div');
         orderItem.classList.add('order-item');
-        orderItem.textContent = `${item.name} - $${item.price.toFixed(2)}`;
+        orderItem.textContent = `${item.name} -  ₹${item.price.toFixed(2)}`;
         orderList.appendChild(orderItem);
     });
 
@@ -43,7 +43,7 @@ document.getElementById('checkout-btn').addEventListener('click', function() {
         return;
     }
 
-    alert(`Your total is $${totalPrice.toFixed(2)}. Thank you for ordering!`);
+    alert(`Your total is  ₹ ${totalPrice.toFixed(2)}. Thank you for ordering!`);
     orderItems = [];
     totalPrice = 0;
     updateOrderSummary();
