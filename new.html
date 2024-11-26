@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Self-Ordering Restaurant</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Welcome to Our Self-Ordering Restaurant</h1>
+        <p>Order your food with ease, right from this page!</p>
+    </header>
+
+    <section class="menu">
+        <h2>Menu</h2>
+        <div class="menu-item">
+            <img src="burger.jpg" alt="Burger">
+            <div class="menu-item-details">
+                <h3>Burger</h3>
+                <p>$5.99</p>
+                <button class="add-to-order" data-item="Burger" data-price="5.99">Add to Order</button>
+            </div>
+        </div>
+        <div class="menu-item">
+            <img src="pizza.jpg" alt="Pizza">
+            <div class="menu-item-details">
+                <h3>Pizza</h3>
+                <p>$8.99</p>
+                <button class="add-to-order" data-item="Pizza" data-price="8.99">Add to Order</button>
+            </div>
+        </div>
+        <div class="menu-item">
+            <img src="salad.jpg" alt="Salad">
+            <div class="menu-item-details">
+                <h3>Salad</h3>
+                <p>$4.99</p>
+                <button class="add-to-order" data-item="Salad" data-price="4.99">Add to Order</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="order-summary">
+        <h2>Your Order</h2>
+        <div id="order-list"></div>
+        <p>Total: $<span id="total-price">0.00</span></p>
+        <button id="checkout-btn">Checkout</button>
+    </section>
+
+    <footer>
+        <p>© 2024 Self-Ordering Restaurant</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
