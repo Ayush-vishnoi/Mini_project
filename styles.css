@@ -102,7 +102,7 @@ footer {
     bottom: 0;
     width: 100%;
 }
-.menu h2{
-    text-indent: 30px;
+#hm{
+    margin-top: 10px;
     text-align: center;
 }
