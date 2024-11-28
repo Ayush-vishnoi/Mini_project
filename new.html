@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Self-Ordering Restaurant</title>
     <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
     <header>
         <h1>Welcome to Our Restaurant</h1>
@@ -13,7 +15,7 @@
     </header>
     <h2 id="hm">Menu</h2>
     <section class="menu">
-        
+
         <div id="bur" class="menu-item">
             <img src="images/burger.jpg" alt="Burger">
             <div class="menu-item-details">
@@ -38,17 +40,15 @@
                 <button class="add-to-order" data-item="Chili potato" data-price="80">Add to Order</button>
             </div>
         </div>
-        <div class="menu-item">
-            <img src="images/French fries.jpg" alt="French fries">
-            <div class="menu-item-details">
-                <h3>French fries</h3>
-                <p>₹80</p>
-                <button class="add-to-order" data-item="French fries" data-price="80">Add to Order</button>
-            </div>
+        <div class="order-summary">
+            <h2>Your Order</h2>
+            <div id="order-list"></div>
+            <p>Total: ₹<span id="total-price">0.00</span></p>
+            <button id="checkout-btn">Checkout</button>
         </div>
     </section>
     <section class="menu">
-        
+
         <div id="bur" class="menu-item">
             <img src="images/cholebhature.jpg" alt="Chole Bhature">
             <div class="menu-item-details">
@@ -84,12 +84,7 @@
     </section>
 
 
-    <section class="order-summary">
-        <h2>Your Order</h2>
-        <div id="order-list"></div>
-        <p>Total: ₹<span id="total-price">0.00</span></p>
-        <button id="checkout-btn">Checkout</button>
-    </section>
+    
 
     <footer>
         <p>© 2024 Self-Ordering Restaurant</p>
@@ -97,4 +92,5 @@
 
     <script src="script.js"></script>
 </body>
+
 </html>
