@@ -48,3 +48,8 @@ document.getElementById('checkout-btn').addEventListener('click', function() {
     totalPrice = 0;
     updateOrderSummary();
 });
+// JavaScript to toggle the burger menu visibility
+const menuIcon = document.getElementById("menu-icon");
+
+
+menuIcon.addEventListener("click", () =);
