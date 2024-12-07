@@ -17,7 +17,7 @@ header{
     display: flex;
     justify-content:space-around;
     align-content: center;
-    padding: 10px 10%;
+    padding: 10px ;
     background: rgba(6, 6, 6, 0.882);
 }
 .logo img{
@@ -46,42 +46,50 @@ header li a:hover{
     color: #9fa9a8;
     transition: all 0.4s ease 0s;
 }
-
-.menu {
-    display: flex;
-    justify-content: center;
-    margin: 20px 0;
+header h1 {
+    color: #fff;
 }
 
-.menu-item {
+/* Order Summary Styles */
+.order-summary {
     background: #fff;
     border-radius: 8px;
     overflow: hidden;
-    margin: 0 12px;
+    margin: 40px auto;
     text-align: center;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 200px;
+    padding: 20px;
+    max-width: 500px; /* Center the order summary */
 }
 
-.menu-item img {
-    width: 100%;
-    height: auto;
+.order-summary h2 {
+    font-size: 1.8em;
+    margin-bottom: 20px;
+    color: #333;
 }
 
-.menu-item-details {
-    padding: 15px;
+#order-list {
+    margin-bottom: 20px;
+    text-align: left; /* Align order items to the left */
 }
 
-.menu-item h3 {
-    font-size: 1.4em;
-    margin-bottom: 10px;
+.order-item {
+    padding: 10px;
+    border-bottom: 1px solid #ddd; /* Add a separator between items */
 }
 
-.menu-item p {
-    font-size: 1.2em;
-    margin-bottom: 10px;
+.order-item:last-child {
+    border-bottom: none; /* Remove border for the last item */
 }
 
+/* Total Price Styles */
+#total-price {
+    font-weight: bold;
+    font-size: 1.5em;
+    color: #e74c3c; /* Highlight total price in red */
+}
+
+/* Button Styles */
 button {
     padding: 10px 20px;
     background-color: #333;
@@ -89,33 +97,12 @@ button {
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
 button:hover {
     background-color: #555;
 }
-
-.order-summary{
-    background: hsl(47, 38%, 68%);
-    border-radius: 8px;
-    overflow: hidden;
-    margin:  40px;
-    text-align: center;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 200px;
-    padding-right: 5px;
-    
-}
-
-.order-summary h2 {
-    font-size: 1.8em;
-    margin-bottom: 20px;
-}
-
-#order-list {
-    margin-bottom: 20px;
-}
-
 footer {
     text-align: center;
     padding: 3px;
@@ -124,8 +111,4 @@ footer {
     position: fixed;
     bottom: 0;
     width: 100%;
-}
-#hm{
-    margin-top: 10px;
-    text-align: center;
 }

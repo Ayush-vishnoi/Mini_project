@@ -1,43 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Burger Restaurant Menu</title>
   <link rel="stylesheet" href="style2.css">
 </head>
+
 <body>
   <header>
-      <h2>DELECIOUS BURGER </h2>
-      <h1> Our Burger Selection</h1>
+    <div class="logo">
+      <img src="images/pngwing.com.png" alt="logo">
+    </div>
+    <nav>
+      <ul>
+        <li><a href="main.html">HOME</a></li>
+        <li><a href="new.html">MENU</a></li>
+        <li><a href="#">ABOUT</a></li>
+      </ul>
+
+    </nav>
+    <div class="log">
+      <a href="order.html"><img src="images/trolley.png" alt="logo"></a>
+    </div>
+
   </header>
 
   <!-- Burger Menu Section -->
   <section class="burger-menu">
-    
+
     <div class="menu-items">
-        <div class="menu-item">
-            <img src="aloob.png" alt="Veggie Burger">
-            <h3>Aloo tikki Burger</h3>
-            <p>Potato patty with lettuce, onion, and chutney for flavor.</p>
-            <span>70</span>
-            <button class="add-to-order" data-item="Burger" data-price="50">Add to Order</button>
-          </div>
-          <hr>
+      <div class="menu-item">
+        <img src="aloob.png" alt="Veggie Burger">
+        <h3>Aloo tikki Burger</h3>
+        <p>Potato patty with lettuce, onion, and chutney for flavor.</p>
+        <span>70</span>
+        <button class="add-to-order" data-item="Aloo tikki Burger" data-price="50">Add to Order</button>
+      </div>
+      <hr>
       <div class="menu-item">
         <img src="burger.jpg" alt="Classic Burger">
         <h3>Classic Burger</h3>
         <p>A delicious classic burger with cheese, lettuce, and tomato.</p>
         <span>80</span>
-        <button class="add-to-order" data-item="Burger" data-price="50">Add to Order</button>
+        <button class="add-to-order" data-item="Classic Burger" data-price="55">Add to Order</button>
       </div>
       <hr>
       <div class="menu-item">
         <img src="burger2.jpg" alt="BBQ Burger">
-        <h3>BBQ<br>  Burger</h3>
+        <h3>BBQ<br> Burger</h3>
         <p>BBQ sauce, bacon, and onion rings for a smoky flavor.</p>
         <span>90</span>
-        <button class="add-to-order" data-item="Burger" data-price="50">Add to Order</button>
+        <button class="add-to-order" data-item="BBQ Burger" data-price="60">Add to Order</button>
       </div>
       <hr>
       <div class="menu-item">
@@ -45,7 +60,7 @@
         <h3>Veggie Burger</h3>
         <p>A vegetarian patty with fresh vegetables and special sauce.</p>
         <span>70</span>
-        <button class="add-to-order" data-item="Burger" data-price="50">Add to Order</button>
+        <button class="add-to-order" data-item="Veggei Burger" data-price="65">Add to Order</button>
       </div>
       <hr>
       <div class="menu-item">
@@ -53,7 +68,7 @@
         <h3>Paneer tikka Burger</h3>
         <p>Paneer patty with lettuce, onion, and spicy makhani sauce.</p>
         <span>110</span>
-        <button class="add-to-order" data-item="Burger" data-price="50">Add to Order</button>
+        <button class="add-to-order" data-item="Paneer tikka Burger" data-price="70">Add to Order</button>
       </div>
       <hr>
       <div class="menu-item">
@@ -61,7 +76,7 @@
         <h3>Mushroom Burger</h3>
         <p>A mushroom burger is with lettuce, tomato, onions, and some sauce.</p>
         <span>160</span>
-        <button class="add-to-order" data-item="Burger" data-price="50">Add to Order</button>
+        <button class="add-to-order" data-item="Mushroom Burger" data-price="75">Add to Order</button>
       </div>
       <hr>
       <div class="menu-item">
@@ -69,17 +84,17 @@
         <h3>Cheese Burger</h3>
         <p>A vegetarian patty with fresh vegetables and special sauce.</p>
         <span>140</span>
-        <button class="add-to-order" data-item="Burger" data-price="50">Add to Order</button>
+        <button class="add-to-order" data-item="Cheese Burger" data-price="80">Add to Order</button>
       </div>
-  </div>
-  
+    </div>
+
     <hr>
   </section>
-  <footer class="footer">
-    <p>&copy; 2024 Delicious Burger. All Rights Reserved.</p>
-  </footer>
 
   <script src="script.js"></script>
-
 </body>
+<footer>
+  <p>&copy; 2024 Delicious Burger. All Rights Reserved.</p>
+</footer>
+
 </html>
