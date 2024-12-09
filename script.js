@@ -78,3 +78,24 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
+function addToOrder(itemName, itemPrice) {
+    let orderItems = JSON.parse(localStorage.getItem('orderItems')) || [];
+    let totalPrice = parseFloat(localStorage.getItem('totalPrice')) || 0;
+
+    // Add new item to order
+    orderItems.push({ name: itemName, price: itemPrice });
+    totalPrice += itemPrice;
+
+    // Save back to localStorage
+    localStorage.setItem('orderItems', JSON.stringify(orderItems));
+    localStorage.setItem('totalPrice', totalPrice);
+
+    // Trigger shake animation
+    const trolleyImage = document.querySelector('.log img'); // Select the trolley image
+    trolleyImage.classList.add('shake'); // Add the shake class
+
+    // Remove the shake class after animation ends to allow it to be triggered again
+    trolleyImage.addEventListener('animationend', () => {
+        trolleyImage.classList.remove('shake');
+    });
+}
