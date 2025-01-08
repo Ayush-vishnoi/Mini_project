@@ -71,6 +71,7 @@ button {
   border-bottom-right-radius: 10px;
   cursor: pointer;
   box-sizing: border-box;
+  
 
 }
 
@@ -126,13 +127,15 @@ button:hover {
 }
 footer {
   text-align: center;
-  padding: 5px;
-  background-color: #342f2f;
+  padding: 3px;
+  background-color: black;
   color: #fff;
   position: fixed;
   width: 100%;
+  bottom: 0;
 
 }
+
 /* Media Query for Mobile */
 @media screen and (max-width: 768px) {
 
