@@ -2,6 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: cursive;
 }
 header{
     width: 100%;
@@ -66,6 +67,7 @@ img{
 .contact-section {
     padding: 20px;
     text-align: center;
+    margin-bottom: 40px;
 }
 footer {
     text-align: center;
