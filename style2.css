@@ -4,13 +4,6 @@
   padding: 0;
   box-sizing: border-box;
 }
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: cursive;
-}
 
 
 header {
@@ -51,7 +44,7 @@ a {
 }
 
 header li a:hover {
-  color: #9fa9a8;
+  color: #4d5e5c;
   transition: all 0.4s ease 0s;
 }
 
