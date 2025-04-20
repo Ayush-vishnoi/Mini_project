@@ -11,7 +11,7 @@
 <body>
     <header>
         <div class="logo">
-            <a href="main.html"><img src="images/pngwing.com.png" alt="logo" ></a>
+            <a href="main.html"><img src="images/pngwing.com.png" alt="logo"></a>
         </div>
         <nav>
             <ul>
@@ -21,43 +21,69 @@
             </ul>
         </nav>
         <div class="log">
-            <a href="order.html"><img src="images/trolley.png" alt="logo" ></a>
+            <a href="order.html"><img src="images/trolley.png" alt="logo"></a>
         </div>
     </header>
     <h2 id="hm">Menu</h2>
     <section class="menu">
 
-        <div id="bur" class="menu-item">
-          <a href="burger.html"> <img src="images/burger.jpg" alt="Burger"></a>
-          <div class="menu-item-details">
+        <div class="menu-item">
+            <img src="images/burger.jpg" alt="Burger">
+            <div class="menu-item-details">
                 <h3>Burger</h3>
-                
-                
+                <p>₹ 60</p>
+                <div class="quantity-control">
+                    <button class="minus">-</button>
+                    <input type="number" class="qty" value="1" min="1">
+                    <button class="plus">+</button>
+                </div>
             </div>
+            <button class="add-to-order" data-item="Burger" data-price="60">Add to Order</button>
+        </div>
+
+        </div>
         </div>
         <div class="menu-item">
-         <a href="pizza.html"> <img src="images/pizza.jpg" alt="Pizza"></a>
+            <img src="images/pizza.jpg" alt="Pizza">
             <div class="menu-item-details">
                 <h3>Pizza</h3>
-                
+                <p>₹ 120</p>
+                <div class="quantity-control">
+                    <button class="minus">-</button>
+                    <input type="number" class="qty" value="1" min="1">
+                    <button class="plus">+</button>
+                </div>
             </div>
+            <button class="add-to-order" data-item="Pizza" data-price="120">Add to Order</button>
+        </div>
+
+        </div>
         </div>
         <div class="menu-item">
-        <a href="chilli.html"> <img src="images/chilipotato.jpg" alt="Chili potato"></a>
+            <img src="images/chilipotato.jpg" alt="Chili potato">
             <div class="menu-item-details">
                 <h3>Chili potato</h3>
-                
+                <p>₹ 80</p>
+                <div class="quantity-control">
+                    <button class="minus">-</button>
+                    <input type="number" class="qty" value="1" min="1">
+                    <button class="plus">+</button>
+                </div>
             </div>
+            <button class="add-to-order" data-item="Chilli potato" data-price="80">Add to Order</button>
         </div>
-    
+
+        </div>
+        </div>
+
     </section>
     <section class="menu">
 
-        <div id="bur" class="menu-item">
+        <div  class="menu-item">
             <img src="images/cholebhature.jpg" alt="Chole Bhature">
             <div class="menu-item-details">
                 <h3>Chole Bhature</h3>
-                <p>₹120</p>
+                <p>₹ 120</p>
                 <div class="quantity-control">
                     <button class="minus">-</button>
                     <input type="number" class="qty" value="1" min="1">
@@ -70,20 +96,30 @@
             <img src="images/Aloo Tikki.jpg" alt="Aloo Tikki">
             <div class="menu-item-details">
                 <h3>Aloo Tikki</h3>
-                <p>₹80</p>
-                <button class="add-to-order" data-item="Aloo Tikki" data-price="80">Add to Order</button>
+                <p>₹ 40</p>
+                <div class="quantity-control">
+                    <button class="minus">-</button>
+                    <input type="number" class="qty" value="1" min="1">
+                    <button class="plus">+</button>
+                </div>
+                <button class="add-to-order" data-item="Aloo Tikki" data-price="40">Add to Order</button>
             </div>
         </div>
         <div class="menu-item">
             <img src="images/Pav Bhaji.jpg" alt="Pav Bhaji">
             <div class="menu-item-details">
                 <h3>Pav Bhaji</h3>
-                <p>₹120</p>
+                <p>₹ 120</p>
+                <div class="quantity-control">
+                    <button class="minus">-</button>
+                    <input type="number" class="qty" value="1" min="1">
+                    <button class="plus">+</button>
+                </div>
                 <button class="add-to-order" data-item="Pav Bhaji" data-price="120">Add to Order</button>
             </div>
         </div>
     </section>
-  <script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
 
 </html>
