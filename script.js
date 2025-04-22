@@ -44,15 +44,29 @@ function handleCheckout() {
     let totalPrice = parseFloat(localStorage.getItem('totalPrice')) || 0;
 
     if (orderItems.length === 0) {
-        alert('No items in your order.');
+        Swal.fire({
+            icon: 'warning',
+            title: 'Oops!',
+            text: 'No items in your order.',
+        });
         return;
     }
 
-    alert(`Your total is ₹${totalPrice.toFixed(2)}. Thank you for ordering!`);
+    Swal.fire({
+        title: 'Thank you for ordering!',
+        text: `Your total is ₹${totalPrice.toFixed(2)}.`,
+        imageUrl: 'images/QR.jpeg', // Replace with your image path
+        imageWidth: 200,
+        imageHeight: 250,
+        imageAlt: 'Order Complete',
+        confirmButtonText: 'OK'
+    });
+
     localStorage.removeItem('orderItems');
     localStorage.removeItem('totalPrice');
     updateOrderSummary();
 }
+
 
 // Modified addToOrder to support quantity
 function addToOrder(itemName, itemPrice, quantity = 1) {
@@ -109,8 +123,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 const itemPrice = parseFloat(addToOrderBtn.getAttribute('data-price'));
                 const quantity = qtyInput ? parseInt(qtyInput.value) : 1;
                 addToOrder(itemName, itemPrice, quantity);
-                alert(`${itemName} x${quantity} added to your order!`);
             });
         }
+        
     });
 });
