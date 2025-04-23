@@ -1,4 +1,5 @@
-// Function to update the order summary display in order.html
+// ------------------- Order Summary Page -------------------
+
 function updateOrderSummary() {
     const orderList = document.getElementById('order-list');
     const totalPriceElement = document.getElementById('total-price');
@@ -8,7 +9,6 @@ function updateOrderSummary() {
 
     const groupedItems = {};
 
-    // Group items by name and count quantity
     orderItems.forEach(item => {
         totalPrice += item.price;
         if (groupedItems[item.name]) {
@@ -22,7 +22,6 @@ function updateOrderSummary() {
         }
     });
 
-    // Clear current order list
     if (orderList) {
         orderList.innerHTML = '';
 
@@ -38,7 +37,6 @@ function updateOrderSummary() {
     }
 }
 
-// Function to handle checkout
 function handleCheckout() {
     let orderItems = JSON.parse(localStorage.getItem('orderItems')) || [];
     let totalPrice = parseFloat(localStorage.getItem('totalPrice')) || 0;
@@ -55,7 +53,7 @@ function handleCheckout() {
     Swal.fire({
         title: 'Thank you for ordering!',
         text: `Your total is ₹${totalPrice.toFixed(2)}.`,
-        imageUrl: 'images/QR.jpeg', // Replace with your image path
+        imageUrl: 'images/QR.jpeg',
         imageWidth: 200,
         imageHeight: 250,
         imageAlt: 'Order Complete',
@@ -67,8 +65,8 @@ function handleCheckout() {
     updateOrderSummary();
 }
 
+// ------------------- Menu Page -------------------
 
-// Modified addToOrder to support quantity
 function addToOrder(itemName, itemPrice, quantity = 1) {
     let orderItems = JSON.parse(localStorage.getItem('orderItems')) || [];
     let totalPrice = parseFloat(localStorage.getItem('totalPrice')) || 0;
@@ -90,15 +88,16 @@ function addToOrder(itemName, itemPrice, quantity = 1) {
     }
 }
 
-// Main event logic
+// ------------------- DOM Events -------------------
+
 document.addEventListener('DOMContentLoaded', () => {
-    // Order Summary Page
+    // Order summary page
     if (document.getElementById('checkout-btn')) {
         updateOrderSummary();
         document.getElementById('checkout-btn').addEventListener('click', handleCheckout);
     }
 
-    // Menu Page
+    // Menu page
     document.querySelectorAll('.menu-item').forEach(item => {
         const plusBtn = item.querySelector('.plus');
         const minusBtn = item.querySelector('.minus');
@@ -125,6 +124,37 @@ document.addEventListener('DOMContentLoaded', () => {
                 addToOrder(itemName, itemPrice, quantity);
             });
         }
-        
     });
+
+    // Advertisement scroll slider
+    const adSlider = document.getElementById('adSlider');
+
+    if (adSlider) {
+        let scrollInterval = setInterval(() => {
+            const scrollWidth = adSlider.scrollWidth;
+            const currentScroll = adSlider.scrollLeft;
+            const viewWidth = adSlider.offsetWidth;
+
+            if (currentScroll + viewWidth >= scrollWidth - 1) {
+                adSlider.scrollLeft = 0;
+            } else {
+                adSlider.scrollLeft += viewWidth;
+            }
+        }, 3000);
+
+        adSlider.addEventListener('mouseenter', () => clearInterval(scrollInterval));
+        adSlider.addEventListener('mouseleave', () => {
+            scrollInterval = setInterval(() => {
+                const scrollWidth = adSlider.scrollWidth;
+                const currentScroll = adSlider.scrollLeft;
+                const viewWidth = adSlider.offsetWidth;
+
+                if (currentScroll + viewWidth >= scrollWidth - 1) {
+                    adSlider.scrollLeft = 0;
+                } else {
+                    adSlider.scrollLeft += viewWidth;
+                }
+            }, 3000);
+        });
+    }
 });
