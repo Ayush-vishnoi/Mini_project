@@ -35,7 +35,7 @@ a{
     cursor: pointer;
 }
 header li a:hover{
-    color: #4e5d5b;
+    color: #485d5a;
     transition: all 0.4s ease 0s;
 }
 img{
@@ -69,6 +69,22 @@ img{
     text-align: center;
     margin-bottom: 40px;
 }
+.linkedin-button {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 5px 10px;
+    background-color: #11222a; /* LinkedIn blue */
+    color: white;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.linkedin-button:hover {
+    background-color: #515f65;
+}
+
 footer {
     text-align: center;
     padding: 3px;

@@ -50,9 +50,13 @@ function handleCheckout() {
         return;
     }
 
+    // ✅ Generate a random 4-digit token number
+    const tokenNumber = Math.floor(1000 + Math.random() * 9000); 
+
     Swal.fire({
         title: 'Thank you for ordering!',
-        text: `Your total is ₹${totalPrice.toFixed(2)}.`,
+        html: `<p>Your total is ₹${totalPrice.toFixed(2)}</p>
+               <p><strong>Order Token:</strong> #${tokenNumber}</p>`,
         imageUrl: 'images/QR.jpeg',
         imageWidth: 200,
         imageHeight: 250,
