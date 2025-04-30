@@ -4,7 +4,7 @@
     box-sizing: border-box;
 }
 body {
-    margin-top: 85px; /* height of header + some buffer */
+    margin-top: 85px; 
 }
 
 
@@ -71,6 +71,13 @@ header li a:hover{
 
 .menu-item-details {
     padding: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 220px; /* or adjust as needed */
+}
+.menu-item-details button {
+    margin-top: auto;
 }
 
 .menu-item h3 {
