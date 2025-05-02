@@ -50,7 +50,7 @@ header li a:hover{
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     display: flex;
-    scroll-behavior: smooth;
+    scroll-behavior: auto;
     border-radius: 12px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     margin: 30px auto;
@@ -72,6 +72,15 @@ header li a:hover{
     user-select: none;
     pointer-events: none;
   }
+  .scroll-slider::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .scroll-slider {
+    -ms-overflow-style: none;     /* IE and Edge */
+    scrollbar-width: none;        /* Firefox */
+  }
+  
   
   
 @media screen and (max-width: 768px) {
