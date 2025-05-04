@@ -63,7 +63,15 @@ function handleCheckout() {
         imageAlt: 'Order Complete',
         confirmButtonText: 'OK'
     });
-
+    let adminOrders = JSON.parse(localStorage.getItem('adminOrders')) || [];
+    adminOrders.push({
+        id: Date.now(),
+        items: orderItems,
+        total: totalPrice
+    });
+    localStorage.setItem('adminOrders', JSON.stringify(adminOrders));
+    
+    
     localStorage.removeItem('orderItems');
     localStorage.removeItem('totalPrice');
     updateOrderSummary();
