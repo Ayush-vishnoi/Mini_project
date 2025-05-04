@@ -1,21 +1,75 @@
-// Redirect if not logged in
-if (localStorage.getItem("isAdmin") !== "true") {
-  alert("Unauthorized access!");
-  window.location.href = "index.html";
+// ===== Login Logic =====
+const ADMIN_USERNAME = "admin";
+const ADMIN_PASSWORD = "admin123";
+
+document.addEventListener("DOMContentLoaded", () => {
+  const loginForm = document.getElementById("admin-login-form");
+  const userButton = document.getElementById("user-login-button");
+  const loginTypeInputs = document.querySelectorAll('input[name="loginType"]');
+
+  if (loginTypeInputs.length > 0) {
+    loginTypeInputs.forEach((input) => {
+      input.addEventListener("change", function () {
+        if (this.value === "admin") {
+          loginForm.style.display = "block";
+          userButton.style.display = "none";
+        } else {
+          loginForm.style.display = "none";
+          userButton.style.display = "block";
+        }
+      });
+    });
+
+    document.addEventListener("keydown", function (event) {
+      if (event.key === "Enter") {
+        const selected = document.querySelector('input[name="loginType"]:checked').value;
+        if (selected === "admin") login();
+        else goToUser();
+      }
+    });
+  }
+
+  // If on admin page, run admin-specific functions
+  if (document.body.id === "admin-page") {
+    enforceAdminAccess();
+    loadCurrentOrder();
+    loadEmployees();
+    loadPayments();
+
+    document.getElementById("mark-done").addEventListener("click", markOrderDone);
+  }
+});
+
+function login() {
+  const user = document.getElementById("username").value;
+  const pass = document.getElementById("password").value;
+  const errorMsg = document.getElementById("error-msg");
+
+  if (user === ADMIN_USERNAME && pass === ADMIN_PASSWORD) {
+    localStorage.setItem("isAdmin", "true");
+    window.location.href = "admin.html";
+  } else {
+    errorMsg.style.display = "block";
+  }
+}
+
+function goToUser() {
+  localStorage.setItem("isUser", "true");
+  window.location.href = "user/main.html";
+}
+
+// ===== Admin Page Functions =====
+function enforceAdminAccess() {
+  if (localStorage.getItem("isAdmin") !== "true") {
+    alert("Unauthorized access!");
+    window.location.href = "index.html";
+  }
 }
 
 function logout() {
   localStorage.removeItem("isAdmin");
   window.location.href = "index.html";
 }
-
-document.addEventListener("DOMContentLoaded", () => {
-  loadCurrentOrder();
-  loadEmployees();
-  loadPayments();
-
-  document.getElementById("mark-done").addEventListener("click", markOrderDone);
-});
 
 function loadCurrentOrder() {
   const current = JSON.parse(localStorage.getItem("cart")) || [];
