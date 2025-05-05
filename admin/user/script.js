@@ -6,7 +6,6 @@ function updateOrderSummary() {
 
     let orderItems = JSON.parse(localStorage.getItem('orderItems')) || [];
     let totalPrice = 0;
-
     const groupedItems = {};
 
     orderItems.forEach(item => {
@@ -24,7 +23,6 @@ function updateOrderSummary() {
 
     if (orderList) {
         orderList.innerHTML = '';
-
         for (const itemName in groupedItems) {
             const itemData = groupedItems[itemName];
             const orderItem = document.createElement('div');
@@ -50,8 +48,7 @@ function handleCheckout() {
         return;
     }
 
-    // ✅ Generate a random 4-digit token number
-    const tokenNumber = Math.floor(1000 + Math.random() * 9000); 
+    const tokenNumber = Math.floor(1000 + Math.random() * 9000);
 
     Swal.fire({
         title: 'Thank you for ordering!',
@@ -63,17 +60,22 @@ function handleCheckout() {
         imageAlt: 'Order Complete',
         confirmButtonText: 'OK'
     });
+
     let adminOrders = JSON.parse(localStorage.getItem('adminOrders')) || [];
     adminOrders.push({
         id: Date.now(),
+        token: tokenNumber,
         items: orderItems,
-        total: totalPrice
+        total: totalPrice,
+        status: "pending"
     });
+
     localStorage.setItem('adminOrders', JSON.stringify(adminOrders));
-    
-    
+
+    // Clear current order
     localStorage.removeItem('orderItems');
     localStorage.removeItem('totalPrice');
+
     updateOrderSummary();
 }
 

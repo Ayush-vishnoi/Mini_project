@@ -6,7 +6,7 @@
   <title>Admin Dashboard</title>
   <link rel="stylesheet" href="admin.css" />
 </head>
-<body>
+<body id="admin-page">
   <header>
     <h1>Admin Dashboard</h1>
     <button onclick="logout()" class="logout-btn">Logout</button>
@@ -20,6 +20,7 @@
         <p>No current order.</p>
       </div>
       <button id="mark-done" class="done-btn">Done</button>
+      <button id="clear-orders" class="clear-btn">Clear All Orders</button>
     </section>
 
     <!-- Payment History -->
@@ -27,6 +28,7 @@
       <h2>Payment History</h2>
       <div id="payment-list"></div>
       <p><strong>Net Profit:</strong> ₹<span id="net-profit">0.00</span></p>
+      <button id="clear-history" class="clear-btn">Clear Payment History</button>
     </section>
   </main>
 
