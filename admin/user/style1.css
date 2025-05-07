@@ -47,7 +47,7 @@ header li a:hover{
 
 .scroll-slider {
     height: 350px;
-    overflow-x: auto;
+    overflow-x: hidden;
     scroll-snap-type: x mandatory;
     display: flex;
     scroll-behavior: smooth;
