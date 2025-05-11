@@ -103,6 +103,45 @@ button {
 button:hover {
     background-color: #555;
 }
+.remove-item {
+    margin-left: 10px;
+    background-color: rgb(20, 14, 15);
+    color: white;
+    border: none;
+    padding: 3px 8px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.remove-item:hover {
+    background-color: rgb(82, 70, 70);
+}
+.coupon-section {
+    margin: 20px 0;
+    text-align: center;
+}
+
+#couponCode {
+    padding: 8px;
+    font-size: 14px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+#applyCouponBtn {
+    padding: 8px 12px;
+    margin-left: 10px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#applyCouponBtn:hover {
+    background-color: #218838;
+}
+
 footer {
     text-align: center;
     padding: 3px;
