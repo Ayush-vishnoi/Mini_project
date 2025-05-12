@@ -25,7 +25,7 @@ function updateOrderSummary() {
         orderList.innerHTML = '';
         for (const itemName in groupedItems) {
             const itemData = groupedItems[itemName];
-            
+
             const orderItem = document.createElement('div');
             orderItem.classList.add('order-item');
             orderItem.innerHTML = `
@@ -35,12 +35,13 @@ function updateOrderSummary() {
             orderList.appendChild(orderItem);
         }
 
+        // Coupon logic only runs if discount-summary exists
+        const discountSummary = document.getElementById('discount-summary');
         const discountCode = localStorage.getItem('discountCode');
-        if (document.getElementById('discount-summary')) {
-            const discountCode = localStorage.getItem('discountCode');
-            let discountedTotal = totalPrice;
-            let discountLabel = '';
-        
+        let discountedTotal = totalPrice;
+        let discountLabel = '';
+
+        if (discountSummary) {
             if (discountCode === 'SAVE10') {
                 discountedTotal = totalPrice * 0.9;
                 discountLabel = '10% off';
@@ -48,29 +49,34 @@ function updateOrderSummary() {
                 discountedTotal = totalPrice * 0.8;
                 discountLabel = '20% off';
             }
-        
+
             localStorage.setItem('totalPrice', discountedTotal.toFixed(2));
             totalPriceElement.textContent = discountedTotal.toFixed(2);
-        
             const discountSummary = document.getElementById('discount-summary');
-            if (discountLabel && discountSummary) {
+if (discountSummary) {
+    const discountCode = localStorage.getItem('discountCode');
+    if (!discountCode) {
+        discountSummary.innerHTML = '';
+    }
+}
+
+            // Show summary only if coupon is active
+            if (discountLabel) {
                 discountSummary.innerHTML = `
                     <p>Original Total: ₹<s>${totalPrice.toFixed(2)}</s></p>
                     <p>Discount Applied: ${discountLabel}</p>
                     <p><strong>New Total: ₹${discountedTotal.toFixed(2)}</strong></p>
                 `;
-            } else if (discountSummary) {
-                discountSummary.innerHTML = '';
+            } else {
+                discountSummary.innerHTML = ''; // Hide if no active coupon
             }
         } else {
-            // Fallback if no coupon on this page
+            // Normal case (pages without discount logic)
             totalPriceElement.textContent = totalPrice.toFixed(2);
         }
-        
-
     }
 
-    // Attach event listeners to remove buttons
+    // Remove item buttons
     document.querySelectorAll('.remove-item').forEach(button => {
         button.addEventListener('click', () => {
             const itemName = button.getAttribute('data-item');
@@ -78,6 +84,7 @@ function updateOrderSummary() {
         });
     });
 }
+
 function removeFromOrder(itemName) {
     let orderItems = JSON.parse(localStorage.getItem('orderItems')) || [];
     // Remove all items with this name
@@ -310,8 +317,8 @@ function applyCoupon() {
         discountLabel = "20% off";
     } else {
         document.getElementById('discount-msg').textContent = "❌ Invalid coupon code.";
-        document.getElementById('discount-summary').innerHTML = '';
         localStorage.removeItem('discountCode');
+        document.getElementById('discount-summary').innerHTML = '';
         updateOrderSummary();
         return;
     }
@@ -322,11 +329,23 @@ function applyCoupon() {
     localStorage.setItem('totalPrice', discountedTotal.toFixed(2));
     localStorage.setItem('discountCode', code);
 
-    // Show success
-    document.getElementById('discount-msg').textContent = `✅ Coupon applied: ${discountLabel}`;
+    // Update total shown
+    document.getElementById('total-price').textContent = discountedTotal.toFixed(2);
 
-    updateOrderSummary(); // this will render new breakdown & updated total
+    // Show coupon breakdown
+    const discountSummary = document.getElementById('discount-summary');
+    if (discountSummary) {
+        discountSummary.innerHTML = `
+            <p>Original Total: ₹<s>${originalTotal.toFixed(2)}</s></p>
+            <p>Discount Applied: ${discountLabel}</p>
+            <p><strong>New Total: ₹${discountedTotal.toFixed(2)}</strong></p>
+        `;
+    }
+
+    // Show message
+    document.getElementById('discount-msg').textContent = `✅ Coupon applied: ${discountLabel}`;
 }
+
 
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -336,17 +355,4 @@ document.addEventListener('DOMContentLoaded', () => {
     if (couponBtn) {
         couponBtn.addEventListener('click', applyCoupon);
     }
-});
-const discountCode = localStorage.getItem('discountCode') || 'None';
-
-Swal.fire({
-    title: 'Thank you for ordering!',
-    html: `<p>Your total is ₹${totalPrice.toFixed(2)}</p>
-           <p><strong>Coupon Used:</strong> ${discountCode}</p>
-           <p><strong>Order Token:</strong> #${tokenNumber}</p>`,
-    imageUrl: 'images/QR.jpeg',
-    imageWidth: 200,
-    imageHeight: 250,
-    imageAlt: 'Order Complete',
-    confirmButtonText: 'OK'
 });
