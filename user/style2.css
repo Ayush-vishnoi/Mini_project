@@ -44,6 +44,41 @@ header li a:hover{
     color: #5a6866;
     transition: all 0.4s ease 0s;
 }
+.admin-orders {
+    margin: 100px auto;
+    max-width: 700px;
+    background-color: #f7f7f7;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.order-card {
+    border: 1px solid #ccc;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 6px;
+    background: white;
+}
+
+.order-card.done {
+    background-color: #e0ffe0;
+    text-decoration: line-through;
+}
+
+.mark-done {
+    margin-top: 10px;
+    padding: 6px 12px;
+    background-color: #28a745;
+    border: none;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.mark-done:hover {
+    background-color: #218838;
+}
+
   
 @media screen and (max-width: 768px) {
     

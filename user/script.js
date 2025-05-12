@@ -1,5 +1,4 @@
 // ------------------- Order Summary Page -------------------
-
 function updateOrderSummary() {
     const orderList = document.getElementById('order-list');
     const totalPriceElement = document.getElementById('total-price');
@@ -16,7 +15,8 @@ function updateOrderSummary() {
         } else {
             groupedItems[item.name] = {
                 quantity: 1,
-                total: item.price
+                total: item.price,
+                price: item.price
             };
         }
     });
@@ -25,15 +25,40 @@ function updateOrderSummary() {
         orderList.innerHTML = '';
         for (const itemName in groupedItems) {
             const itemData = groupedItems[itemName];
+            
             const orderItem = document.createElement('div');
             orderItem.classList.add('order-item');
-            orderItem.textContent = `${itemName} x${itemData.quantity} - ₹${itemData.total.toFixed(2)}`;
+            orderItem.innerHTML = `
+                ${itemName} x${itemData.quantity} - ₹${itemData.total.toFixed(2)}
+                <button class="remove-item" data-item="${itemName}">❌</button>
+            `;
             orderList.appendChild(orderItem);
         }
 
         totalPriceElement.textContent = totalPrice.toFixed(2);
     }
+
+    // Attach event listeners to remove buttons
+    document.querySelectorAll('.remove-item').forEach(button => {
+        button.addEventListener('click', () => {
+            const itemName = button.getAttribute('data-item');
+            removeFromOrder(itemName);
+        });
+    });
 }
+function removeFromOrder(itemName) {
+    let orderItems = JSON.parse(localStorage.getItem('orderItems')) || [];
+    // Remove all items with this name
+    orderItems = orderItems.filter(item => item.name !== itemName);
+    localStorage.setItem('orderItems', JSON.stringify(orderItems));
+
+    // Recalculate totalPrice
+    const newTotal = orderItems.reduce((sum, item) => sum + item.price, 0);
+    localStorage.setItem('totalPrice', newTotal);
+
+    updateOrderSummary();
+}
+
 
 function handleCheckout() {
     let orderItems = JSON.parse(localStorage.getItem('orderItems')) || [];
@@ -110,7 +135,46 @@ document.addEventListener('DOMContentLoaded', () => {
         updateOrderSummary();
         document.getElementById('checkout-btn').addEventListener('click', handleCheckout);
     }
-
+    if (document.getElementById('adminOrders')) {
+        const adminOrdersContainer = document.getElementById('adminOrders');
+        let adminOrders = JSON.parse(localStorage.getItem('adminOrders')) || [];
+    
+        if (adminOrders.length === 0) {
+            adminOrdersContainer.innerHTML = "<p style='text-align:center;'>No orders yet.</p>";
+        } else {
+            adminOrdersContainer.innerHTML = "";
+            adminOrders.forEach(order => {
+                const orderDiv = document.createElement('div');
+                orderDiv.classList.add('order-card');
+                if (order.status === "done") orderDiv.classList.add("done");
+    
+                const itemList = order.items.map(item => item.name).join(", ");
+    
+                orderDiv.innerHTML = `
+                    <p><strong>Token:</strong> #${order.token}</p>
+                    <p><strong>Total:</strong> ₹${order.total.toFixed(2)}</p>
+                    <p><strong>Items:</strong> ${itemList}</p>
+                    <p><strong>Status:</strong> ${order.status}</p>
+                    ${order.status === "pending" ? `<button class="mark-done" data-id="${order.id}">Mark as Done</button>` : ""}
+                `;
+    
+                adminOrdersContainer.appendChild(orderDiv);
+            });
+    
+            document.querySelectorAll('.mark-done').forEach(button => {
+                button.addEventListener('click', () => {
+                    const id = parseInt(button.getAttribute('data-id'));
+                    let orders = JSON.parse(localStorage.getItem('adminOrders')) || [];
+                    orders = orders.map(order =>
+                        order.id === id ? { ...order, status: "done" } : order
+                    );
+                    localStorage.setItem('adminOrders', JSON.stringify(orders));
+                    location.reload(); // refresh to update status
+                });
+            });
+        }
+    }
+    
     // Menu page
     document.querySelectorAll('.menu-item').forEach(item => {
         const plusBtn = item.querySelector('.plus');
@@ -170,5 +234,33 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }, 3000);
         });
+    }
+});
+function applyCoupon() {
+    const code = document.getElementById('couponCode').value.trim().toUpperCase();
+    let totalPrice = parseFloat(localStorage.getItem('totalPrice')) || 0;
+
+    let discount = 0;
+
+    if (code === "SAVE10") {
+        discount = 0.10;
+    } else if (code === "SAVE20") {
+        discount = 0.20;
+    } else {
+        document.getElementById('discount-msg').textContent = "Invalid coupon code.";
+        return;
+    }
+
+    const discountedPrice = totalPrice - (totalPrice * discount);
+    localStorage.setItem('totalPrice', discountedPrice.toFixed(2));
+    document.getElementById('discount-msg').textContent = `Coupon applied! You saved ₹${(totalPrice * discount).toFixed(2)}`;
+    updateOrderSummary();
+}
+document.addEventListener('DOMContentLoaded', () => {
+    // ... existing code ...
+
+    const couponBtn = document.getElementById('applyCouponBtn');
+    if (couponBtn) {
+        couponBtn.addEventListener('click', applyCoupon);
     }
 });
