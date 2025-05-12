@@ -49,6 +49,38 @@ header li a:hover{
 header h1 {
     color: #fff;
 }
+.log {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    position: relative;
+  }
+  .admin-btn {
+    margin-left: 12px;
+    padding: 6px 16px;
+    background: linear-gradient(135deg, #222, #444);
+    color: #fff;
+    border: 1px solid #666;
+    border-radius: 20px;
+    font-size: 15px;
+    font-weight: 500;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    height: 38px;
+    position: relative;
+    top: -2px; /* shifts the button slightly upward */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+    transition: all 0.3s ease;
+  }
+  
+  .admin-btn:hover {
+    background: linear-gradient(135deg, #333, #666);
+    color: #f0f0f0;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+  }
+  
 
 /* Order Summary Styles */
 .order-summary {
@@ -75,7 +107,10 @@ header h1 {
 
 .order-item {
     padding: 10px;
-    border-bottom: 1px solid #ddd; /* Add a separator between items */
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .order-item:last-child {
@@ -104,18 +139,22 @@ button:hover {
     background-color: #555;
 }
 .remove-item {
-    margin-left: 10px;
-    background-color: rgb(20, 14, 15);
-    color: white;
+    background: none;
     border: none;
-    padding: 3px 8px;
-    border-radius: 5px;
+    color: black;
+    font-size: 20px;
+    font-weight: bold;
     cursor: pointer;
+    padding: 0;
+    margin: 0;
+    line-height: 1;
+    transition: color 0.2s ease;
 }
 
 .remove-item:hover {
-    background-color: rgb(82, 70, 70);
+    color: red;
 }
+
 .coupon-section {
     margin: 20px 0;
     text-align: center;

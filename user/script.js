@@ -35,7 +35,39 @@ function updateOrderSummary() {
             orderList.appendChild(orderItem);
         }
 
-        totalPriceElement.textContent = totalPrice.toFixed(2);
+        const discountCode = localStorage.getItem('discountCode');
+        if (document.getElementById('discount-summary')) {
+            const discountCode = localStorage.getItem('discountCode');
+            let discountedTotal = totalPrice;
+            let discountLabel = '';
+        
+            if (discountCode === 'SAVE10') {
+                discountedTotal = totalPrice * 0.9;
+                discountLabel = '10% off';
+            } else if (discountCode === 'SAVE20') {
+                discountedTotal = totalPrice * 0.8;
+                discountLabel = '20% off';
+            }
+        
+            localStorage.setItem('totalPrice', discountedTotal.toFixed(2));
+            totalPriceElement.textContent = discountedTotal.toFixed(2);
+        
+            const discountSummary = document.getElementById('discount-summary');
+            if (discountLabel && discountSummary) {
+                discountSummary.innerHTML = `
+                    <p>Original Total: ₹<s>${totalPrice.toFixed(2)}</s></p>
+                    <p>Discount Applied: ${discountLabel}</p>
+                    <p><strong>New Total: ₹${discountedTotal.toFixed(2)}</strong></p>
+                `;
+            } else if (discountSummary) {
+                discountSummary.innerHTML = '';
+            }
+        } else {
+            // Fallback if no coupon on this page
+            totalPriceElement.textContent = totalPrice.toFixed(2);
+        }
+        
+
     }
 
     // Attach event listeners to remove buttons
@@ -138,6 +170,15 @@ document.addEventListener('DOMContentLoaded', () => {
     if (document.getElementById('adminOrders')) {
         const adminOrdersContainer = document.getElementById('adminOrders');
         let adminOrders = JSON.parse(localStorage.getItem('adminOrders')) || [];
+
+// Sort: 1. pending first, 2. newest first
+adminOrders.sort((a, b) => {
+  if (a.status === b.status) {
+    return b.id - a.id; // newer first
+  }
+  return a.status === "pending" ? -1 : 1; // pending first
+});
+
     
         if (adminOrders.length === 0) {
             adminOrdersContainer.innerHTML = "<p style='text-align:center;'>No orders yet.</p>";
@@ -173,6 +214,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
             });
         }
+        const clearBtn = document.getElementById('clearOrdersBtn');
+if (clearBtn) {
+  clearBtn.addEventListener('click', () => {
+    const confirmed = confirm("Are you sure you want to clear all order history?");
+    if (confirmed) {
+      localStorage.removeItem('adminOrders');
+      location.reload(); // Refresh the page
+    }
+  });
+}
+
     }
     
     // Menu page
@@ -238,24 +290,45 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 function applyCoupon() {
     const code = document.getElementById('couponCode').value.trim().toUpperCase();
-    let totalPrice = parseFloat(localStorage.getItem('totalPrice')) || 0;
+    let orderItems = JSON.parse(localStorage.getItem('orderItems')) || [];
 
-    let discount = 0;
-
-    if (code === "SAVE10") {
-        discount = 0.10;
-    } else if (code === "SAVE20") {
-        discount = 0.20;
-    } else {
-        document.getElementById('discount-msg').textContent = "Invalid coupon code.";
+    if (orderItems.length === 0) {
+        document.getElementById('discount-msg').textContent = "Your cart is empty.";
         return;
     }
 
-    const discountedPrice = totalPrice - (totalPrice * discount);
-    localStorage.setItem('totalPrice', discountedPrice.toFixed(2));
-    document.getElementById('discount-msg').textContent = `Coupon applied! You saved ₹${(totalPrice * discount).toFixed(2)}`;
-    updateOrderSummary();
+    const originalTotal = orderItems.reduce((sum, item) => sum + item.price, 0);
+
+    let discount = 0;
+    let discountLabel = '';
+
+    if (code === "SAVE10") {
+        discount = 0.10;
+        discountLabel = "10% off";
+    } else if (code === "SAVE20") {
+        discount = 0.20;
+        discountLabel = "20% off";
+    } else {
+        document.getElementById('discount-msg').textContent = "❌ Invalid coupon code.";
+        document.getElementById('discount-summary').innerHTML = '';
+        localStorage.removeItem('discountCode');
+        updateOrderSummary();
+        return;
+    }
+
+    const discountedTotal = originalTotal - (originalTotal * discount);
+
+    // Save to localStorage
+    localStorage.setItem('totalPrice', discountedTotal.toFixed(2));
+    localStorage.setItem('discountCode', code);
+
+    // Show success
+    document.getElementById('discount-msg').textContent = `✅ Coupon applied: ${discountLabel}`;
+
+    updateOrderSummary(); // this will render new breakdown & updated total
 }
+
+
 document.addEventListener('DOMContentLoaded', () => {
     // ... existing code ...
 
@@ -263,4 +336,17 @@ document.addEventListener('DOMContentLoaded', () => {
     if (couponBtn) {
         couponBtn.addEventListener('click', applyCoupon);
     }
+});
+const discountCode = localStorage.getItem('discountCode') || 'None';
+
+Swal.fire({
+    title: 'Thank you for ordering!',
+    html: `<p>Your total is ₹${totalPrice.toFixed(2)}</p>
+           <p><strong>Coupon Used:</strong> ${discountCode}</p>
+           <p><strong>Order Token:</strong> #${tokenNumber}</p>`,
+    imageUrl: 'images/QR.jpeg',
+    imageWidth: 200,
+    imageHeight: 250,
+    imageAlt: 'Order Complete',
+    confirmButtonText: 'OK'
 });

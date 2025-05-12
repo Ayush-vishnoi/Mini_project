@@ -22,6 +22,7 @@
     </nav>
     <div class="log">
         <a href="order.html"><img src="images/trolley.png" alt="logo" ></a>
+        <a href="admin.html" class="admin-btn">ADMIN</a>
     </div>
 </header>
 <body>
@@ -30,13 +31,18 @@
         <button id="applyCouponBtn">Apply Coupon</button>
         <p id="discount-msg" style="color: green; font-weight: bold;"></p>
     </div>
-    
+    <p id="discount-msg" style="color: green; font-weight: bold;"></p>
+   
     <section class="order-summary">
         <h2>Your Order</h2>
         <div id="order-list"></div>
+        
+        <div id="discount-summary" style="margin: 10px 0;"></div> <!-- Moved here -->
+        
         <p>Total: ₹<span id="total-price">0.00</span></p>
         <button id="checkout-btn">Checkout</button>
     </section>
+    
     
     <script src="script.js"></script>
 

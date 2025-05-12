@@ -47,6 +47,38 @@ header li a:hover{
     color: #6a6d6c;
     transition: all 0.4s ease 0s;
 }
+.log {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    position: relative;
+  }
+  .admin-btn {
+    margin-left: 12px;
+    padding: 6px 16px;
+    background: linear-gradient(135deg, #222, #444);
+    color: #fff;
+    border: 1px solid #666;
+    border-radius: 20px;
+    font-size: 15px;
+    font-weight: 500;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    height: 38px;
+    position: relative;
+    top: -2px; /* shifts the button slightly upward */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+    transition: all 0.3s ease;
+  }
+  
+  .admin-btn:hover {
+    background: linear-gradient(135deg, #333, #666);
+    color: #f0f0f0;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+  }
+  
 
 .menu {
     display: flex;
